@@ -1,0 +1,45 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        title 형준아 뭐먹고 싶어
+    body
+        input#s(type="checkbox" name="dong" value="신수동")
+        label 신수동
+        br
+        input#d(type="checkbox" name="dong" value="대흥동")
+        label 대흥동
+        br
+        input#n(type="checkbox" name="dong" value="노고산동")
+        label 노고산동
+        br
+        button#choose 시작
+        p#demo
+        script.
+            var t=document.getElementById('choose');
+            t.addEventListener('click',function(event){
+                value_check();
+            });
+            function value_check(){
+                var check_count=document.getElementsByName("dong").length;
+                for(var i=0; i<check_count;i++){
+                    if(document.getElementsByName("dong")[i].checked==true){
+                        var dongs=document.getElementsByName("dong")[i].value;
+                    }
+                }
+                
+                var xhr=new XMLHttpRequest();
+                
+                xhr.onload=function(){
+                    
+                    if(xhr.status==200||xhr.status==304)
+                    {
+                        var users=JSON.parse(xhr.responseText);
+                        var text=document.querySelector('#demo');
+                        text.innerHTML=`당첨!!: ${users.name} /주소: ${users.address1}`
+                    }
+                }
+                xhr.open("GET",`http://localhost:5000/choose/${dongs}`,true);
+                xhr.send();
+            }
+            
