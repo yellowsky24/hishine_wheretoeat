@@ -5,21 +5,22 @@ html
         title 형준아 뭐먹고 싶어
         link(rel='stylesheet' href='/main.css')
     body
-        input.cbx#s(type="checkbox" name="dong" value='정문')
-        label 정문
-        br
-        input.cbx#d(type="checkbox" name="dong" value='후문')
-        label 후문
-        br
-        input.cbx#d(type="checkbox" name="dong" value='남문')
-        label 남문
-        br
-        input.cbx#n(type="checkbox" name="dong" value='학교안')
-        label 학교안
-        br
-        input.cbx#n(type="checkbox" name="dong" value='신이')
-        label 신촌 / 이대
-        br
+        div.cbxs
+            input.cbx#a(type="checkbox" name="dong" value='정문')
+            label(for="a") 정문
+            br
+            input.cbx#b(type="checkbox" name="dong" value='후문')
+            label(for="b") 후문
+            br
+            input.cbx#c(type="checkbox" name="dong" value='남문')
+            label(for="c") 남문
+            br
+            input.cbx#d(type="checkbox" name="dong" value='학교안')
+            label(for="d") 학교안
+            br
+            input.cbx#e(type="checkbox" name="dong" value='신이')
+            label(for="e") 신촌 / 이대
+            br
 
         button.btn#choose 시작
         p#demo
