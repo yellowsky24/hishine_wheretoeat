@@ -3,20 +3,29 @@ html
     head
         meta(charset='utf-8')
         title 형준아 뭐먹고 싶어
+        link(rel='stylesheet' href='/main.css')
     body
-        input#s(type="checkbox" name="dong" value="신수동")
-        label 신수동
+        input.cbx#s(type="checkbox" name="dong" value='정문')
+        label 정문
         br
-        input#d(type="checkbox" name="dong" value="대흥동")
-        label 대흥동
+        input.cbx#d(type="checkbox" name="dong" value='후문')
+        label 후문
         br
-        input#n(type="checkbox" name="dong" value="노고산동")
-        label 노고산동
+        input.cbx#d(type="checkbox" name="dong" value='남문')
+        label 남문
         br
-        button#choose 시작
+        input.cbx#n(type="checkbox" name="dong" value='학교안')
+        label 학교안
+        br
+        input.cbx#n(type="checkbox" name="dong" value='신이')
+        label 신촌 / 이대
+        br
+
+        button.btn#choose 시작
         p#demo
         script.
             var t=document.getElementById('choose');
+            var dongs=[];
             t.addEventListener('click',function(event){
                 value_check();
             });
@@ -24,7 +33,7 @@ html
                 var check_count=document.getElementsByName("dong").length;
                 for(var i=0; i<check_count;i++){
                     if(document.getElementsByName("dong")[i].checked==true){
-                        var dongs=document.getElementsByName("dong")[i].value;
+                        dongs.push(document.getElementsByName("dong")[i].value);
                     }
                 }
                 
@@ -36,10 +45,12 @@ html
                     {
                         var users=JSON.parse(xhr.responseText);
                         var text=document.querySelector('#demo');
-                        text.innerHTML=`당첨!!: ${users.name} /주소: ${users.address1}`
+                        
+                        text.innerHTML=`당첨!!: ${users[0].name} /주소: ${users[0].addr}`
                     }
                 }
                 xhr.open("GET",`http://localhost:5000/choose/${dongs}`,true);
                 xhr.send();
+                dongs=[];
             }
             
